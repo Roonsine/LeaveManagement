@@ -25,7 +25,7 @@ namespace LeaveManagement.Controllers
         public ActionResult Index()
         {
             var leaveTypes = _repo.FindAll().ToList();
-            var model = _mapper.Map<List<LeaveType>, List<DetailsLeaveTypeViewModel>>(leaveTypes);
+            var model = _mapper.Map<List<LeaveType>, List<LeaveTypeViewModel>>(leaveTypes);
             return View(model);
         }
 
@@ -44,15 +44,29 @@ namespace LeaveManagement.Controllers
         // POST: LeaveTypesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(LeaveTypeViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var leaveType = _mapper.Map<LeaveType>(model);
+                leaveType.DateCreated = DateTime.Now;
+                var isSuccess = _repo.Create(leaveType);
+
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "Something went wrong... Oops.");
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went wrong... Oops.");
+                return View(model);
             }
         }
 
