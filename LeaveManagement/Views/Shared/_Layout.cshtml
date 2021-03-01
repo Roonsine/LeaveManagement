@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+
 </head>
 <body>
     <header>
@@ -34,17 +37,17 @@
                         {
                             if (User.IsInRole("Administrator"))
                             {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
-                                    Manage
-                                </a>
-                                <div class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item text-white" asp-controller="LeaveTypes" asp-action="Index">Leave Types</a>
-                                    <a class="dropdown-item text-white" href="#">Leave Allocations</a>
-                                    <a class="dropdown-item text-white" href="#">Leave Applications</a>
-                                    <a class="dropdown-item text-white" href="#">Employees</a>
-                                </div>
-                            </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                        Manage
+                                    </a>
+                                    <div class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-white" asp-controller="LeaveTypes" asp-action="Index">Leave Types</a>
+                                        <a class="dropdown-item text-white" href="#">Leave Allocations</a>
+                                        <a class="dropdown-item text-white" href="#">Leave Applications</a>
+                                        <a class="dropdown-item text-white" href="#">Employees</a>
+                                    </div>
+                                </li>
                             }
                         }
                     </ul>
@@ -67,6 +70,13 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
+    <script>
+        tippy('.link', {
+            placement: 'top',
+        })
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
